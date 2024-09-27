@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>제100회 단국서예전</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>한문 작품 해석</h1>
+      <ul id="artList">
+        <li onclick="showModal('art1')">邊詞, 법학 22 이유찬</li>
+        <li onclick="showModal('art2')">山中送別, 산업보안 20 김민성</li>
+        <li onclick="showModal('art3')">秋夜雨中, 반도체 20 강정완</li>
+        <li onclick="showModal('art4')">春花秋實, 반도체 20 강정완</li>
+        <li onclick="showModal('art5')">
+          論語 知之爲知之~, 화학공학 22 김나예
+        </li>
+        <li onclick="showModal('art6')">淸平調, 법학 20 최민선</li>
+        <li onclick="showModal('art7')">野雪, 법학 20 최민선</li>
+        <li onclick="showModal('art8')">眞水無香, 법학 20 최민선</li>
+        <li onclick="showModal('art9')">玉不琢不成器, 법학 20 최민선</li>
+        <li onclick="showModal('art10')">禮人不答反其敬, 도예 20 정계진</li>
+        <li onclick="showModal('art11')">節臨乙瑛碑, 화학공학 23 손범서</li>
+        <li onclick="showModal('art12')">節臨顔勤禮碑, 경제 22 박소윤</li>
+        <li onclick="showModal('art13')">
+          論語 知者樂水仁者樂山~, 경제 20 정다인
+        </li>
+        <li onclick="showModal('art14')">節臨九成宮醴泉銘, 경영 20 남기웅</li>
+        <li onclick="showModal('art15')">有言者不必有德, 반도체 24 임하진</li>
+        <li onclick="showModal('art16')">
+          節臨元顯儁墓誌竝蓋銘, 반도체 24 임하진
+        </li>
+        <li onclick="showModal('art17')">春興, 한문교육 23 조한진</li>
+        <li onclick="showModal('art18')">山中留客, 한문교육 23 조한진</li>
+      </ul>
+    </div>
+
+    <!-- 모달 창 -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+      </div>
+    </div>
+
+    <script>
+      const descriptions = {
+        art1: {
+          title: "장경춘 - 변방의 노래",
+          text: "오원 땅의 봄빛은 예부터 더디 온다고 하지만 이월인데도 수양버들은 아직 움도 틔우지 못했네. 이제야 황허강가에는 얼음이 녹는 철이니 바로 이때 장안에선 꽃이 떨어지는 때이네.",
+        },
+        art2: {
+          title: "왕유 - 산중송별",
+          text: "산중에서 그대와 헤어진 후로 지는 해 보면서 사립문을 닫았네. 봄 풀은 새해에도 다시 푸를 테지만 떠나간 그대는 돌아올지 못 올지",
+        },
+        art3: {
+          title: "최치원 - 추야우중",
+          text: "가을 바람에 이렇게 힘들여 읊고 있건만 세상 어디에도 날 알아주는 이 없네. 창 밖엔 깊은 밤비 내리는데 등불 아래 천만 리 떠나간 마음.",
+        },
+        art4: {
+          title: "춘화추실",
+          text: "봄 동산에 꽃 피더니 가을 바람에 열매가 익어 가는구나",
+        },
+        art5: {
+          title: "공자 <논어> 中 - 지지위지지~",
+          text: "아는 것을 안다고 말하고 모르는 것을 모른다고 말하는 것이 곧 아는 것이다.",
+        },
+        art6: {
+          title: "이백 - 청평조",
+          text: "구름은 저고리 되고, 꽃은 얼굴이 되어 봄바람 난간에 부는데 이슬 맺힌 꽃처럼 농염하네 만약 군옥산 꼭대기에서 볼 수 없다면 틀림없이 요대의 달빛 아래에서 볼 수 있겠지 ",
+        },
+        art7: {
+          title: "이양연 - 야설",
+          text: "눈을 뚫고 들판을 걸을 때 모름지기 그 발걸음 어지러이 하지마라 오늘 아침 내가 걸어간 발자국이 마침내 뒷사람의 이정표가 될 것이니 ",
+        },
+        art8: {
+          title: "진수무향",
+          text: "참된 물은 향기가 없다",
+        },
+        art9: {
+          title: "옥불탁불성기",
+          text: "옥도 쪼지 않으면 그릇이 될 수 없다.",
+        },
+        art10: {
+          title: "맹자 <이루> 中 - 예인부답반기경",
+          text: "남에게 예를 갖추었는데 답이 없으면 자신의 공경을 반성하라 ",
+        },
+        art11: {
+          title: "을령비(임서)",
+          text: "사도인 신 웅과 사공인 신 계는 머리를 조아리고 아뢰옵니다.",
+        },
+        art12: {
+          title: "안근례비(임서)",
+          text: "수나라 사경국교서 동궁학사 장령왕 시독을 지냈고, 패국 유진과 경전의 뜻을 논쟁했는데 진이 여러 번 굴복했다.",
+        },
+        art13: {
+          title: "공자 <논어> 中 - 지자요수인자요산~",
+          text: "지자는 물을 좋아하고 인자는 산을 좋아한다. 지자는 동적이고 인자는 정적이며 지자는 삶을 즐기고 인자는 천수를 누린다.",
+        },
+        art14: {
+          title: "구성궁예천명(임서)",
+          text: "본래 수원이 모자라 구하였으나 없는 것이 한 가지, 물에 있으니 이미 사람의 힘으로는 미칠 바가 못되었지만",
+        },
+        art15: {
+          title: "공자 <논어> 中 - 유언자불필유덕",
+          text: "훌륭한 말을 하는 사람이 반드시 덕이 있는 것은 아니다.",
+        },
+        art16: {
+          title: "원현준묘지병개명(임서)",
+          text: "말을 앞세우는 사람에게는 반드시 덕이 있는 것이 아니다. 대위 연창 二년 계사 二월 병진삭 二十九일 갑신에 고처사 원군의 묘지명",
+        },
+        art17: {
+          title: "정몽주 - 춘흥",
+          text: "가랑비 보슬보슬 내려 빗방울 지지 않더니, 밤 들자 나직한 빗소리 들리네. 눈도 녹아 앞개울 넘실거릴 게라, 봄 풀싹도 파릇이 돋았겠구나",
+        },
+        art18: {
+          title: "장욱 - 산중유객",
+          text: "산빛과 만물들 봄 햇살에 어른거리니 날이 좀 흐리다고 내려갈 생각 마시게 비 내릴 기색없는 청명한 날에도 구름 깊은 곳에 들어가면 옷 젖기 마련이라오.",
+        },
+      };
+
+      // 모달 창 띄우기
+      function showModal(artKey) {
+        const art = descriptions[artKey];
+        document.getElementById("modalTitle").innerText = art.title;
+        document.getElementById("modalText").innerText = art.text;
+        document.getElementById("myModal").style.display = "block";
+      }
+
+      // 모달 창 닫기
+      function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+      }
+
+      // 모달 창 외부 클릭 시 닫기
+      window.onclick = function (event) {
+        const modal = document.getElementById("myModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
